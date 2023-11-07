@@ -17,7 +17,7 @@ export class AuthService {
   ) {}
 
   login(user: User){
-    if (user.userName == 'adrian' && user.password == '1234' ) {
+    if (user.userName == 'user' && user.password == '1234' ) {
       this.loggedIn.next(true);
       localStorage.setItem('access', 'granted');
     }
