@@ -1,0 +1,88 @@
+  <h3>Search your favorite character !</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event, dataSource)" placeholder="Ex. John Snow" #input>
+  </mat-form-field>
+
+  <nav class="pager">
+    Change page
+    <ul class="pagination" [style.font-weight]="'500'">
+
+      <li class="page-item" [class.disabled]="isFirstPage">
+        <a class="page-link" (click)="previous()">
+          Previous
+        </a>
+      </li>
+
+      <li class="page-item"><a class="page-link">{{ currentPage -1 }} </a></li>
+      <li class="page-item active"><a class="page-link"> {{ currentPage }} </a></li>
+      <li class="page-item"><a class="page-link">{{ currentPage + 1 }} </a></li>
+
+      <li class="page-item" [class.disabled]="isLastPage">
+        <a class="page-link" (click)="next()">
+          Next
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <div class="mat-elevation-z8">
+    <table mat-table
+           matSort
+           [dataSource]="dataSource"
+           multiTemplateDataRows
+         class="mat-elevation-z8">
+    <ng-container matColumnDef="name" *ngFor="let column of characterColumns">
+      <th mat-header-cell *matHeaderCellDef> Name / Aliases </th>
+      <div *matCellDef="let character">
+        <ng-template [ngIf]="character.name" [ngIfElse]="aliasesAlternative">
+          <td mat-cell class="td-name"> {{ character.name }}</td>
+        </ng-template>
+        <ng-template #aliasesAlternative>
+          <td mat-cell class="td-aliases"> {{ character.aliases }}</td>
+        </ng-template>
+      </div>
+    </ng-container>
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let character">
+        <button mat-icon-button aria-label="expand row" (click)="(expandedCharacter = expandedCharacter === character ? null : character); $event.stopPropagation()">
+          <mat-icon *ngIf="expandedCharacter !== character">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="expandedCharacter === character">keyboard_arrow_up</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let character" [attr.colspan]="characterColumnsWithExpand.length">
+        <div class="example-element-detail"
+             [@detailExpand]="character == expandedCharacter ? 'expanded' : 'collapsed'">
+          <div class="example-element-diagram">
+            <div class="example-element-position">Culture: {{character.culture}} </div>
+            <div class="example-element-symbol">Gender: {{character.gender}} </div>
+            <div class="example-element-name"> Titles: {{character.titles}} </div>
+            <div class="example-element-name"> Born: {{character.born}} </div>
+          </div>
+          <div class="example-element-description">
+            {{character.description}}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="characterColumnsWithExpand"></tr>
+    <tr mat-row *matRowDef="let character; columns: characterColumnsWithExpand;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedCharacter === character"
+        (click)="expandedCharacter = expandedCharacter === character ? null : character">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOption"
+                 showFirstLastButtons>
+  </mat-paginator>
+  </div>

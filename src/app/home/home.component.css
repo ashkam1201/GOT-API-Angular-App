@@ -1,0 +1,68 @@
+.title {
+  font-family: "Andale Mono", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 10rem;
+  text-align: center;
+}
+
+a{
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+}
+
+a span{
+  position: relative;
+  z-index: 2;
+}
+
+.book-link:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #5CE1F7;
+  transition: all .35s;
+}
+
+.character-link:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #3AE059;
+  transition: all .35s;
+}
+
+.house-link:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #ff003b;
+  transition: all .35s;
+}
+
+a:hover{
+  color: #fff;
+}
+
+a:hover:after{
+  width: 100%;
+}

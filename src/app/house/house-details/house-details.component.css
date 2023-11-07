@@ -1,0 +1,13 @@
+.house-details-card {
+  margin: 10px;
+  display: grid;
+  justify-content: center;
+  border: solid 10px black;
+}
+
+.nav-link {
+  display: flex;
+  justify-content: center;
+  border: solid black 5px;
+  border-radius: 30px;
+}

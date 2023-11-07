@@ -1,0 +1,26 @@
+.mat-toolbar {
+  background: darkred;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.separator {
+  color: white;
+}
+
+.separator:hover {
+  color: black;
+}
+
+button {
+  border: none;
+  background: none;
+  text-decoration: none;
+}
+
+.nav-link{
+  color: black;
+}

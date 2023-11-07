@@ -1,0 +1,53 @@
+<h3>Search your favorite book of the saga !</h3>
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event, dataSource)" placeholder="Ex. Game of Thrones" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table
+         [dataSource]="dataSource" multiTemplateDataRows
+         class="mat-elevation-z8">
+    <ng-container matColumnDef="name" *ngFor="let column of bookColumns">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let book"> {{book.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let book">
+        <button mat-icon-button aria-label="expand row" (click)="(expandedBook = expandedBook === book ? null : book); $event.stopPropagation()">
+          <mat-icon *ngIf="expandedBook !== book">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="expandedBook === book">keyboard_arrow_up</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let book" [attr.colspan]="bookColumnsWithExpand.length">
+        <div class="example-element-detail"
+             [@detailExpand]="book == expandedBook ? 'expanded' : 'collapsed'">
+          <div class="example-element-diagram">
+            <div class="example-element-aliases">Number of pages: {{book.numberOfPages}} </div>
+            <div class="example-element-position">Authors: {{book.authors}} </div>
+          </div>
+          <div class="example-element-description">
+            {{book.description}}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="bookColumnsWithExpand"></tr>
+    <tr mat-row *matRowDef="let book; columns: bookColumnsWithExpand;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedBook === book"
+        (click)="expandedBook = expandedBook === book ? null : book">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="pageSizeOption"
+                 showFirstLastButtons>
+  </mat-paginator>
+</div>

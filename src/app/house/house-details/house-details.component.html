@@ -1,0 +1,15 @@
+<mat-card class="house-details-card">
+  <mat-card-header>
+    <mat-card-title>{{house?.name}}</mat-card-title>
+    <mat-card-subtitle>{{house?.region}}</mat-card-subtitle>
+  </mat-card-header>
+  <img src="./assets/images/houses.jpeg" alt="GOT Books">
+  <mat-card-content>
+    <p>{{house?.founder}}</p>
+    <p>{{house?.seats}}</p>
+    <p>{{house?.founded}}</p>
+  </mat-card-content>
+  <button mat-menu-item routerLink="/house" class="nav-link">
+    Go back to all houses
+  </button>
+</mat-card>

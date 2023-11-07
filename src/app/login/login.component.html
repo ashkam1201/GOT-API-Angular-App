@@ -1,0 +1,24 @@
+<h2>Login</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-outline mb-4">
+    <input type="username" id="inputUsername" class="form-control" formControlName="userName"/>
+    <label class="form-label" for="inputUsername">Username</label>
+    <div class="bg-danger" *ngIf="isFieldInvalid('userName')">
+      Please inform your username
+    </div>
+  </div>
+  <div class="form-outline mb-4">
+    <input type="password" id="inputPassword" class="form-control" formControlName="password"/>
+    <label class="form-label" for="inputPassword">Password</label>
+    <div class="bg-danger" *ngIf="isFieldInvalid('password')">
+      Please inform your password
+    </div>
+  </div>
+
+  <button type="submit"  class="btn btn-primary btn-block mb-4">Sign in</button>
+
+  <div class="text-center">
+    <p>Having trouble login? <a [href]="emailSupport">Contact support</a></p>
+  </div>
+</form>

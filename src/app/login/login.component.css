@@ -1,0 +1,15 @@
+h2 {
+  padding-top: 2rem;
+  display: grid;
+  justify-content: center;
+}
+
+form {
+  margin: 2rem;
+  display: grid;
+  justify-content: center;
+}
+
+form .btn {
+  margin-top: 2rem;
+}
